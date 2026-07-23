@@ -2,7 +2,8 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://avanya-backend.vercel.app",
-  withCredentials: true,
+  // baseURL: "http://localhost:3000",
+  //withCredentials: true,
 });
 
 export const leadsApi = {
