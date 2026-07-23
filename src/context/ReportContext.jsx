@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import useAxios from "../hooks/useAxios";
-import axios from "axios";
+import { reportsApi } from "../api";
 
 const ReportContext = createContext();
 export const useReportContext = () => useContext(ReportContext);
@@ -11,7 +11,7 @@ const ReportContextProvider = ({ children }) => {
     data: closed_leads_data,
     loading: closed_data_loading,
     error: closed_data_error,
-  } = useAxios("https://avanya-backend.vercel.app/report/last-week");
+  } = useAxios("/report/last-week");
 
   const total_closed_leads = closed_leads_data?.data?.length || 0;
 
@@ -24,9 +24,7 @@ const ReportContextProvider = ({ children }) => {
     }, {}) || {};
 
   //  PIPELINE DATA
-  const { data: leadsIn_pipeline_data } = useAxios(
-    "https://avanya-backend.vercel.app/report/pipeline"
-  );
+  const { data: leadsIn_pipeline_data } = useAxios("/report/pipeline");
   const leadsIn_pipeline = leadsIn_pipeline_data?.totalLeadsInpieline;
   //  FINAL VALUE
   const value = {

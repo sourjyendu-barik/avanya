@@ -1,16 +1,16 @@
 import React from "react";
 import LeadForm from "./LeadForm";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { leadsApi } from "../api";
 const UpdateLeadModal = ({ defaultdata, setTriggerLead }) => {
   if (!defaultdata) {
     return null;
   }
   const updateLead = async (leadFormData) => {
     try {
-      const updated_formdata = await axios.post(
-        `https://avanya-backend.vercel.app/updateLeadData/${defaultdata._id}`,
-        leadFormData
+      const updated_formdata = await leadsApi.update(
+        defaultdata._id,
+        leadFormData,
       );
       // console.log(updated_formdata);
 

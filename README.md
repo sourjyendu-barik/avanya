@@ -140,14 +140,6 @@ Sample Body:<br>
 
 ---
 
-### **GET /tags**<br>
-
-Get list of all tags.<br>
-Sample Response:<br>
-`[{ _id, name }, ...]`
-
----
-
 ### **GET /report/last-week**<br>
 
 Get leads closed in the last 7 days, with agent info.<br>

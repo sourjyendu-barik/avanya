@@ -108,13 +108,6 @@ ul {
   padding-left: 0 !important;
 }
 
-/* =========================
-   NOTE: Filter CSS removed because Bootstrap grid handles layout
-   ========================= */
-
-/* No more .quick-filters ul { display:flex } */
-/* No more .quick-filters li { flex:1 } */
-/* No mobile override for filters */
 
 /* =========================
    Lead Details

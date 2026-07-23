@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import useAxios from "../hooks/useAxios";
-import useAxiosDelete from "../hooks/useAxiosDelete";
+import { leadsApi } from "../api";
 const LeadContext = createContext();
 export const useLeadContext = () => useContext(LeadContext);
 
@@ -30,7 +30,7 @@ export const LeadContextProvider = ({ children }) => {
       params.set("tags", latestFilters.tags.join(","));
     }
     params.set("t", trigger);
-    const newUrl = `https://avanya-backend.vercel.app/getAllLeads?${params.toString()}`;
+    const newUrl = `/getAllLeads?${params.toString()}`;
     setQueryUrl(newUrl);
   };
 
@@ -76,18 +76,9 @@ export const LeadContextProvider = ({ children }) => {
     return acc;
   }, {});
 
-  const {
-    deleteRequest,
-    delete_data,
-    loading: deleting_leadData,
-    error: deleting_leadData_error,
-  } = useAxiosDelete();
-
   const deleteLead = async (id) => {
     try {
-      const res = await deleteRequest(
-        `https://avanya-backend.vercel.app/deleteLead/${id}`
-      );
+      const res = await leadsApi.delete(id);
 
       setTrigger((prev) => !prev);
 
@@ -110,9 +101,6 @@ export const LeadContextProvider = ({ children }) => {
     refetchLeads,
     //deleting
     deleteLead,
-    delete_data,
-    deleting_leadData,
-    deleting_leadData_error,
   };
 
   return <LeadContext.Provider value={value}>{children}</LeadContext.Provider>;

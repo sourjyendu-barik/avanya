@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../api";
 
 const useAxiosDelete = () => {
   const [delete_data, setDeleteData] = useState(null);
@@ -11,13 +11,13 @@ const useAxiosDelete = () => {
     setError(null);
 
     try {
-      const res = await axios.delete(url);
+      const res = await api.delete(url);
       setDeleteData(res.data);
-      return res.data; 
+      return res.data;
     } catch (err) {
       setError(err);
       console.error(err);
-      throw err; 
+      throw err;
     } finally {
       setLoading(false);
     }

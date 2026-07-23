@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useSalesContext } from "../context/SalesAgentsContext";
+import { salesAgentsApi } from "../api";
 const AddSalesAgent = () => {
   const { setTriggerSalesAgent } = useSalesContext();
   const [formData, setFormData] = useState({
@@ -16,10 +16,7 @@ const AddSalesAgent = () => {
   const handleFotmData = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://avanya-backend.vercel.app/addSalesAgent",
-        formData
-      );
+      const response = await salesAgentsApi.create(formData);
       // console.log("Data added successfully", response.data);
       toast.success("Added New Sales Agent successfully");
 

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Aside from "../components/Aside";
-import axios from "axios";
 import LeadForm from "../components/LeadForm";
 import { useLeadContext } from "../context/LeadContext";
 import { toast } from "react-toastify";
+import { leadsApi } from "../api";
 const AddLead = () => {
   const { refetchLeads } = useLeadContext();
   const defaultFormData = {
@@ -18,10 +18,7 @@ const AddLead = () => {
   };
   const handleForm = async (leadFormData) => {
     try {
-      const saved_formdata = await axios.post(
-        "https://avanya-backend.vercel.app/addNewLead",
-        leadFormData
-      );
+      const saved_formdata = await leadsApi.create(leadFormData);
       // console.log(saved_formdata);
       toast.success("Added Lead data successfully");
       refetchLeads();
