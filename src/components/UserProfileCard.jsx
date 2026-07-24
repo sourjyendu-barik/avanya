@@ -1,12 +1,16 @@
 import React from "react";
 import { useUserContext } from "../context/UseContext";
 import { toast } from "react-toastify";
-
+import { useLeadContext } from "../context/LeadContext";
+import { useSalesContext } from "../context/SalesAgentsContext";
 const UserProfileCard = () => {
   const { user, logout } = useUserContext();
-
+  const { clearLead } = useLeadContext();
+  const { clearAgent } = useSalesContext();
   const handleLogout = () => {
     logout();
+    clearAgent();
+    clearLead();
     toast.success("Logged out successfully");
   };
 

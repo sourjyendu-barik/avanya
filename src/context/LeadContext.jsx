@@ -87,12 +87,14 @@ export const LeadContextProvider = ({ children }) => {
       console.error("Delete failed:", err);
     }
   };
+  const clearLead = () => setLead_List([]);
   const value = {
     // leadlist rendering
     lead_List,
     setLead_List,
     leadDataloading,
     leadLoadingError,
+    clearLead,
     //
     filters,
     updateFilter,

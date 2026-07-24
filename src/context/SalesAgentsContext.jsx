@@ -27,12 +27,14 @@ const SalesAgentsContextProvider = ({ children }) => {
       console.log(error.message);
     }
   };
+  const clearAgent = () => setSalesAgents_List([]);
   const value = {
     SalesAgents_List,
     setSalesAgents_List,
     salesAgentDataLoading,
     salesAgentDataLoadingError,
     setTriggerSalesAgent,
+    clearAgent,
     //delete agent
     deleteAgent,
   };
