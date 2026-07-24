@@ -1,6 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUserContext } from "../context/UseContext";
 import LoadingComp from "./LoadingComp";
+import { LeadContextProvider } from "../context/LeadContext";
+import SalesAgentsContextProvider from "../context/SalesAgentsContext";
+import ReportContextProvider from "../context/ReportContext";
 
 function PrivateRoute() {
   const { user, loading } = useUserContext();
@@ -13,7 +16,15 @@ function PrivateRoute() {
     return <Navigate to="/signin" replace />;
   }
 
-  return <Outlet />;
+  return (
+    <LeadContextProvider>
+      <SalesAgentsContextProvider>
+        <ReportContextProvider>
+          <Outlet />
+        </ReportContextProvider>
+      </SalesAgentsContextProvider>
+    </LeadContextProvider>
+  );
 }
 
 export default PrivateRoute;
