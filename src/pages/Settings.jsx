@@ -5,6 +5,7 @@ import { useLeadContext } from "../context/LeadContext";
 import { useSalesContext } from "../context/SalesAgentsContext";
 import { toast } from "react-toastify";
 import useRefresh from "../hooks/useRefresh";
+import UserProfileCard from "../components/UserProfileCard";
 const Settings = () => {
   useRefresh();
   const {
@@ -28,6 +29,7 @@ const Settings = () => {
       <div className="page-content">
         <Aside />
         <div className="main-page">
+          <UserProfileCard />
           <h1>Lead List and Sales Agent List</h1>
           {/* lead list  */}
           <div>

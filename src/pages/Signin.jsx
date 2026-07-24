@@ -1,20 +1,32 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
-
+//import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/UseContext";
+import { toast } from "react-toastify";
 function Signin() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const { login } = useUserContext();
+  const googleLogin = useGoogleLogin({
+    flow: "auth-code",
 
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => {
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem(
-        "googleAccessToken",
-        tokenResponse.access_token || "",
-      );
-      navigate("/dashboard");
+    onSuccess: async ({ code }) => {
+      try {
+        const success = await login(code);
+
+        if (success) {
+          toast.success("User logged in successfully");
+          //navigate("/dashboard");
+        } else {
+          toast.error("User login failed");
+        }
+      } catch (err) {
+        console.error(err);
+        toast.error("User login failed");
+      }
     },
+
     onError: () => {
-      localStorage.setItem("isAuthenticated", "false");
+      console.log("Google Login Failed");
+      toast.error("Google login failed");
     },
   });
 
@@ -65,7 +77,7 @@ function Signin() {
 
               <button
                 className="btn btn-outline-dark w-100 py-3 d-flex align-items-center justify-content-center gap-2"
-                onClick={() => login()}
+                onClick={() => googleLogin()}
               >
                 <img
                   src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"

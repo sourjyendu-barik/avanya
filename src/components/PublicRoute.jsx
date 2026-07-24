@@ -1,8 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useUserContext } from "../context/UseContext";
 
 function PublicRoute() {
-  const isAuthenticated = false;
-  if (isAuthenticated) {
+  const { user } = useUserContext();
+
+  if (user) {
     return <Navigate to="/dashboard" replace />;
   }
 
